@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Results | Sri Sivani Exam Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/student.css"> <!-- For results memo overlay display -->
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand" style="flex-direction: row; align-items: center; gap: 10px;">
+        <img src="../images/logo.jpg" alt="Sri Sivani Logo" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;">
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <span class="logo" style="font-size: 1.1rem; line-height: 1.2;">Sri Sivani</span>
+          <span class="subtitle" style="font-size: 0.65rem; letter-spacing: 0.5px;">Exam Portal</span>
+        </div>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html" class="sidebar-link" id="link-dashboard">Dashboard</a></li>
+        <li><a href="students.html" class="sidebar-link" id="link-students">Students</a></li>
+        <li><a href="subjects.html" class="sidebar-link" id="link-subjects">Subjects</a></li>
+        <li><a href="exams.html" class="sidebar-link" id="link-exams">Exams</a></li>
+        <li><a href="upload-result.html" class="sidebar-link" id="link-upload">Upload Marks PDF</a></li>
+        <li><a href="results.html" class="sidebar-link active" id="link-results">Results</a></li>
+      </ul>
+      <div class="sidebar-footer">
+        <a href="#" class="sidebar-link" onclick="handleLogout()">Logout</a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="main-header">
+        <div>
+          <h1>Examination Results</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">View, modify, publish, and export student performance records</p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-primary" onclick="publishAll()">Publish All</button>
+          <button class="btn btn-secondary" onclick="exportToExcel()">Export Excel</button>
+        </div>
+      </header>
+
+      <!-- Search & Filters Toolbar -->
+      <section class="toolbar">
+        <div class="form-group" style="margin-bottom: 0; min-width: 220px;">
+          <input type="text" id="search-roll" class="form-control" placeholder="Search Roll Number..." oninput="loadResults()">
+        </div>
+        
+        <div class="filter-group">
+          <select id="filter-exam" class="form-control" onchange="loadResults()">
+            <option value="">All Exams</option>
+          </select>
+
+          <select id="filter-branch" class="form-control" onchange="loadResults()">
+            <option value="">All Branches</option>
+          </select>
+
+          <select id="filter-semester" class="form-control" onchange="loadResults()">
+            <option value="">All Semesters</option>
+            <option value="1-1">1-1</option>
+            <option value="1-2">1-2</option>
+            <option value="2-1">2-1</option>
+            <option value="2-2">2-2</option>
+            <option value="3-1">3-1</option>
+            <option value="3-2">3-2</option>
+            <option value="4-1">4-1</option>
+            <option value="4-2">4-2</option>
+          </select>
+
+          <select id="filter-status" class="form-control" onchange="loadResults()">
+            <option value="">All Statuses</option>
+            <option value="DRAFT">DRAFT</option>
+            <option value="PUBLISHED">PUBLISHED</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Results Table -->
+      <section class="table-container">
+        <table id="results-table">
+          <thead>
+            <tr>
+              <th>Roll Number</th>
+              <th>Student Name</th>
+              <th>Exam Name</th>
+              <th>SGPA</th>
+              <th>CGPA</th>
+              <th>Status</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="7" style="text-align: center; color: var(--text-muted);">Loading examination results...</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <!-- Detail Result Memo Modal (Overlay) -->
+  <div class="modal-overlay" id="result-detail-modal">
+    <div class="modal-content" style="max-width: 800px; padding: 20px;">
+      <div style="display: flex; justify-content: space-between; margin-bottom: 20px; align-items: center;">
+        <h3 style="color: var(--primary);">Academic Grade Memo Details</h3>
+        <div style="display: flex; gap: 10px;">
+          <button id="modal-download-pdf-btn" class="btn btn-secondary btn-icon" style="padding: 6px 12px;">Download PDF</button>
+          <button class="btn btn-danger btn-icon" style="padding: 6px 12px;" onclick="closeResultModal()">Close</button>
+        </div>
+      </div>
+
+      <!-- Live memo mockup content -->
+      <div id="memo-modal-body" class="memo-card" style="box-shadow: none; border: 1px solid var(--border); padding: 30px;">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+  <script src="../js/results.js"></script>
+</body>
+</html>

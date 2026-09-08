@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile | Sri Sivani Exam Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/student.css">
+</head>
+<body>
+
+  <!-- College Brand Header -->
+  <header class="student-header" style="background-color: var(--surface); border-bottom: 1px solid var(--border); padding: 20px 30px; position: relative; display: flex; align-items: center; justify-content: center; min-height: 125px;">
+    
+    <!-- Logo -->
+    <div class="header-logo-container" style="position: absolute; left: 40px; display: flex; align-items: center;">
+      <img src="../images/logo.jpg" alt="Sri Sivani Logo" style="width: 95px; height: 95px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-md);">
+    </div>
+    
+    <!-- Brand Text -->
+    <div class="header-center-text" style="text-align: center; display: flex; flex-direction: column; align-items: center; max-width: 800px; margin: 0 auto; padding: 0 100px;">
+      <h2 style="font-size: 1.6rem; color: var(--primary); margin: 0; font-family: var(--font-primary); font-weight: 800; letter-spacing: 0.5px; line-height: 1.2;">SRI SIVANI COLLEGE OF ENGINEERING</h2>
+      <span style="font-size: 0.95rem; font-weight: 700; color: #1e293b; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px;">(AUTONOMOUS) &nbsp;|&nbsp; [ An Autonomous Institution ]</span>
+      
+      <span style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); margin-top: 5px; line-height: 1.4;">
+        Approved by AICTE and Permanently Affiliated to JNTUGV, Vizianagaram | Accredited by NAAC, UGC Recognition under 2(f) & 12(B)
+      </span>
+      
+      <span style="font-size: 0.72rem; font-weight: 500; color: var(--text-muted); margin-top: 2px;">
+        NH-16, Chilakapalem Jn., Srikakulam Dist., Andhra Pradesh - 532410
+      </span>
+      
+      <div style="width: 100%; max-width: 450px; height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); margin: 6px 0;"></div>
+      
+      <span style="font-size: 0.72rem; font-weight: 700; color: var(--primary); letter-spacing: 0.3px;">
+        Email: info@srisivani.com &nbsp;|&nbsp; Web: srisivani.com
+      </span>
+    </div>
+  </header>
+
+  <!-- Navigation Subbar -->
+  <nav class="student-navbar" style="padding: 10px 30px;">
+    <div class="nav-user" style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
+      <span id="student-welcome-name" style="font-weight: 600;">Student Profile</span>
+      <div style="display: flex; gap: 15px; align-items: center;">
+        <a href="dashboard.html" class="btn btn-secondary btn-icon" style="padding: 5px 12px; font-size: 0.85rem;">Dashboard</a>
+        <a href="#" class="logout-btn" onclick="handleLogout()">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="student-container">
+    <header style="margin-bottom: 30px;">
+      <h1>My Profile</h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">Official academic record and details registered in database</p>
+    </header>
+
+    <!-- Dynamic Layout Grid: ID Card Left, Edit Forms Right -->
+    <div class="profile-layout-grid">
+      <!-- Left Column: Digital ID Card -->
+      <div class="id-card-wrapper">
+        <div class="id-card">
+          <!-- Header -->
+          <div class="id-card-header">
+            <h2 class="college-title">SRI SIVANI</h2>
+            <h3 class="college-sub">COLLEGE OF ENGINEERING</h3>
+            <div class="college-initials">SSCE</div>
+            <div class="accreditation">ACCREDITED BY NBA & NAAC</div>
+            <div class="accreditation-sub">APPROVED BY AICTE & AFFILIATED TO JNTUGV</div>
+            <div class="address">CHILAKAPALEM JN., SRIKAKULAM-532402</div>
+          </div>
+          
+          <!-- Mid Badge Section (Emblem on Left, Photo on Right) -->
+          <div class="id-card-body">
+            <div class="id-card-body-left">
+              <img src="../images/logo.jpg" alt="SSCE Emblem" class="id-emblem">
+              <div class="blood-group">
+                <span class="blood-icon">🩸</span>
+                <span class="blood-text">A+ve</span>
+              </div>
+            </div>
+            <div class="id-card-body-right">
+              <div class="id-photo-frame">
+                <!-- Render initials avatar as photo -->
+                <div id="avatar-initials" class="id-photo-initials">-</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Student Information Details -->
+          <div class="id-card-details">
+            <h2 id="profile-name" class="id-name">-</h2>
+            
+            <div class="id-info-rows">
+              <div class="id-row">
+                <span class="id-label">Regd No</span>
+                <span class="id-separator">:</span>
+                <span id="profile-roll" class="id-value">-</span>
+              </div>
+              <div class="id-row">
+                <span class="id-label">Branch</span>
+                <span class="id-separator">:</span>
+                <span id="profile-branch" class="id-value">-</span>
+              </div>
+              <div class="id-row">
+                <span class="id-label">Batch</span>
+                <span class="id-separator">:</span>
+                <span id="profile-batch" class="id-value">-</span>
+              </div>
+              <div class="id-row">
+                <span class="id-label">Year & Sem</span>
+                <span class="id-separator">:</span>
+                <span id="profile-year-sem" class="id-value">-</span>
+              </div>
+              <div class="id-row">
+                <span class="id-label">Section</span>
+                <span class="id-separator">:</span>
+                <span id="profile-section" class="id-value">-</span>
+              </div>
+              <div class="id-row">
+                <span class="id-label">Email</span>
+                <span class="id-separator">:</span>
+                <span id="profile-email" class="id-value" style="font-size: 0.8rem; word-break: break-all;">-</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Footer Contact & Signature -->
+          <div class="id-card-footer">
+            <div class="contact-block">
+              <span class="contact-label">Contact No:</span>
+              <span id="profile-phone" class="contact-value">-</span>
+            </div>
+            <div class="signature-block" style="text-align: center;">
+              <div class="sim-signature" style="height: 25px;">
+                <svg width="80" height="25" viewBox="0 0 100 30" style="opacity: 0.8; display: block; margin: 0 auto;">
+                  <path d="M10,25 C30,10 40,5 60,15 C70,20 80,10 90,5" fill="none" stroke="#0e3a95" stroke-width="2"/>
+                  <path d="M15,20 C35,15 50,10 65,18" fill="none" stroke="#0e3a95" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div class="sig-title">PRINCIPAL</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Settings and Action Forms -->
+      <div class="profile-forms-column">
+        <!-- Contact Info Card -->
+        <section class="profile-edit-card">
+          <h3 style="margin-bottom: 20px; font-family: var(--font-primary); color: var(--primary);">Update Contact Info</h3>
+          <form id="contact-form">
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="edit-email" style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85rem;">Email Address</label>
+              <input type="email" id="edit-email" class="form-control" required style="width: 100%;">
+            </div>
+            <div class="form-group" style="margin-bottom: 20px;">
+              <label for="edit-phone" style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85rem;">Phone Number</label>
+              <input type="text" id="edit-phone" class="form-control" placeholder="e.g. 9876543210" style="width: 100%;">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 10px; cursor: pointer;">Save Contact Details</button>
+          </form>
+        </section>
+
+        <!-- Change Password Card -->
+        <section class="profile-edit-card">
+          <h3 style="margin-bottom: 20px; font-family: var(--font-primary); color: var(--primary);">Change Password</h3>
+          <form id="password-form">
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label for="current-password" style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85rem;">Current Password</label>
+              <input type="password" id="current-password" class="form-control" required style="width: 100%;">
+            </div>
+            <div class="form-group" style="margin-bottom: 12px;">
+              <label for="new-password" style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85rem;">New Password</label>
+              <input type="password" id="new-password" class="form-control" required style="width: 100%;">
+            </div>
+            <div class="form-group" style="margin-bottom: 20px;">
+              <label for="confirm-password" style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.85rem;">Confirm New Password</label>
+              <input type="password" id="confirm-password" class="form-control" required style="width: 100%;">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 10px; cursor: pointer;">Change Password</button>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+  <script src="../js/student.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Marks PDF | Sri Sivani Exam Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <style>
+    .editable-cell {
+      border: 1px dashed transparent;
+      padding: 4px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .editable-cell:hover {
+      border-color: var(--text-muted);
+      background-color: #f8fafc;
+    }
+    .editable-cell:focus {
+      border-color: var(--primary);
+      background-color: white;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(10, 92, 92, 0.2);
+    }
+    .record-invalid {
+      background-color: var(--danger-light) !important;
+    }
+    .error-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      background-color: var(--danger);
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand" style="flex-direction: row; align-items: center; gap: 10px;">
+        <img src="../images/logo.jpg" alt="Sri Sivani Logo" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;">
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <span class="logo" style="font-size: 1.1rem; line-height: 1.2;">Sri Sivani</span>
+          <span class="subtitle" style="font-size: 0.65rem; letter-spacing: 0.5px;">Exam Portal</span>
+        </div>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html" class="sidebar-link" id="link-dashboard">Dashboard</a></li>
+        <li><a href="students.html" class="sidebar-link" id="link-students">Students</a></li>
+        <li><a href="subjects.html" class="sidebar-link" id="link-subjects">Subjects</a></li>
+        <li><a href="exams.html" class="sidebar-link" id="link-exams">Exams</a></li>
+        <li><a href="upload-result.html" class="sidebar-link active" id="link-upload">Upload Marks PDF</a></li>
+        <li><a href="results.html" class="sidebar-link" id="link-results">Results</a></li>
+      </ul>
+      <div class="sidebar-footer">
+        <a href="#" class="sidebar-link" onclick="handleLogout()">Logout</a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="main-header">
+        <div>
+          <h1>Upload Exam Grades PDF</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Upload a student grade PDF to parse, preview, and import academic results</p>
+        </div>
+      </header>
+
+      <!-- Step 1: Upload Form -->
+      <section id="upload-panel" class="table-container" style="padding: 30px; margin-bottom: 30px;">
+        <div style="max-width: 500px; margin: 0 auto;">
+          <div class="form-group" style="margin-bottom: 25px;">
+            <label for="upload-exam">Select Exam Configuration *</label>
+            <select id="upload-exam" class="form-control" required>
+              <option value="">-- Choose Exam --</option>
+            </select>
+          </div>
+
+          <!-- Drag and Drop Box -->
+          <div class="upload-zone" id="drop-zone">
+            <span class="upload-icon">📄</span>
+            <h3 style="font-size: 1.1rem; font-weight: 700;">Drag & Drop Marks PDF</h3>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">or click to browse local files (PDF only, max 10MB)</p>
+            <input type="file" id="file-input" accept="application/pdf" style="display: none;">
+            <div id="file-name-display" style="font-weight: bold; color: var(--primary); margin-top: 10px;"></div>
+          </div>
+
+          <div style="text-align: center; margin-top: 30px;">
+            <button class="btn btn-primary" id="btn-process" onclick="processUpload()" style="width: 100%;" disabled>Process PDF</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Loading Overlay -->
+      <section id="loading-panel" style="display: none; text-align: center; padding: 50px 0;">
+        <div class="spinner" style="margin: 0 auto 20px auto;"></div>
+        <h2 style="font-size: 1.3rem; color: var(--primary); margin-bottom: 5px;">Processing PDF...</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Extracting student marks & grades. Please wait.</p>
+      </section>
+
+      <!-- Step 2: Verification Preview -->
+      <section id="preview-panel" style="display: none;">
+        <div class="main-header" style="margin-bottom: 20px;">
+          <div>
+            <h2>Extracted Results Preview</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Double click any dashed cell to edit. Review highlighted invalid lines before saving.</p>
+          </div>
+          <div style="display: flex; gap: 15px;">
+            <button class="btn btn-secondary" onclick="resetUpload()">Cancel / Upload New</button>
+            <button class="btn btn-success" id="btn-save-draft" onclick="saveExtractedData()">Save as Draft</button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table id="preview-table">
+            <thead>
+              <tr>
+                <th>Roll Number</th>
+                <th>Student Name</th>
+                <th>Subject Code</th>
+                <th>Subject Name</th>
+                <th>Grade (O, A+, A, B+, B, C, F)</th>
+                <th>Status</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamic preview rows -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+  <script src="../js/upload.js"></script>
+</body>
+</html>

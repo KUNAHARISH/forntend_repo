@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Students | Sri Sivani Exam Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand" style="flex-direction: row; align-items: center; gap: 10px;">
+        <img src="../images/logo.jpg" alt="Sri Sivani Logo" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;">
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <span class="logo" style="font-size: 1.1rem; line-height: 1.2;">Sri Sivani</span>
+          <span class="subtitle" style="font-size: 0.65rem; letter-spacing: 0.5px;">Exam Portal</span>
+        </div>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html" class="sidebar-link" id="link-dashboard">Dashboard</a></li>
+        <li><a href="students.html" class="sidebar-link active" id="link-students">Students</a></li>
+        <li><a href="subjects.html" class="sidebar-link" id="link-subjects">Subjects</a></li>
+        <li><a href="exams.html" class="sidebar-link" id="link-exams">Exams</a></li>
+        <li><a href="upload-result.html" class="sidebar-link" id="link-upload">Upload Marks PDF</a></li>
+        <li><a href="results.html" class="sidebar-link" id="link-results">Results</a></li>
+      </ul>
+      <div class="sidebar-footer">
+        <a href="#" class="sidebar-link" onclick="handleLogout()">Logout</a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="main-header">
+        <div>
+          <h1>Student Management</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Register, update, and search student enrollment records</p>
+        </div>
+        <button class="btn btn-primary" onclick="openAddModal()">Add Student</button>
+      </header>
+
+      <!-- Search & Filters Toolbar -->
+      <section class="toolbar">
+        <div class="form-group" style="margin-bottom: 0; min-width: 250px;">
+          <input type="text" id="search-input" class="form-control" placeholder="Search by name, roll, email..." oninput="filterStudents()">
+        </div>
+        
+        <div class="filter-group">
+          <select id="filter-branch" class="form-control" onchange="filterStudents()">
+            <option value="">All Branches</option>
+          </select>
+
+          <select id="filter-semester" class="form-control" onchange="filterStudents()">
+            <option value="">All Semesters</option>
+            <option value="1-1">1-1</option>
+            <option value="1-2">1-2</option>
+            <option value="2-1">2-1</option>
+            <option value="2-2">2-2</option>
+            <option value="3-1">3-1</option>
+            <option value="3-2">3-2</option>
+            <option value="4-1">4-1</option>
+            <option value="4-2">4-2</option>
+          </select>
+
+          <select id="filter-section" class="form-control" onchange="filterStudents()">
+            <option value="">All Sections</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Students Table -->
+      <section class="table-container">
+        <table id="students-table">
+          <thead>
+            <tr>
+              <th>Roll Number</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Branch</th>
+              <th>Sem / Sec</th>
+              <th>Phone</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="7" style="text-align: center; color: var(--text-muted);">Loading students list...</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <!-- Student Modals (Add / Edit) -->
+  <div class="modal-overlay" id="student-modal">
+    <div class="modal-content" style="max-width: 700px;">
+      <h2 id="modal-title" style="margin-bottom: 20px; color: var(--primary);">Add New Student</h2>
+      
+      <form id="student-form">
+        <!-- Hidden input for editing ID -->
+        <input type="hidden" id="student-id">
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div class="form-group">
+            <label for="rollNumber">Roll Number *</label>
+            <input type="text" id="rollNumber" class="form-control" required style="text-transform: uppercase;">
+          </div>
+          <div class="form-group">
+            <label for="name">Student Name *</label>
+            <input type="text" id="name" class="form-control" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="password" id="password-label">Password *</label>
+            <input type="password" id="password" class="form-control" required placeholder="For login account creation">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+          <div class="form-group">
+            <label for="branch">Branch *</label>
+            <input type="text" id="branch" class="form-control" list="branch-list" required placeholder="e.g. AI & ML">
+            <datalist id="branch-list"></datalist>
+          </div>
+          <div class="form-group">
+            <label for="year">Year *</label>
+            <select id="year" class="form-control" required>
+              <option value="1">1st Year</option>
+              <option value="2">2nd Year</option>
+              <option value="3">3rd Year</option>
+              <option value="4">4th Year</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="semester">Semester *</label>
+            <select id="semester" class="form-control" required>
+              <option value="1-1">1-1</option>
+              <option value="1-2">1-2</option>
+              <option value="2-1">2-1</option>
+              <option value="2-2">2-2</option>
+              <option value="3-1">3-1</option>
+              <option value="3-2">3-2</option>
+              <option value="4-1">4-1</option>
+              <option value="4-2">4-2</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+          <div class="form-group">
+            <label for="section">Section *</label>
+            <select id="section" class="form-control" required>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" class="form-control">
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 30px;">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Student</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+  <script src="../js/students.js"></script>
+</body>
+</html>

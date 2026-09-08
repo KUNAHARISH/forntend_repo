@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sri Sivani College of Engineering | Exam Results</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .landing-body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: radial-gradient(circle at 10% 20%, rgba(10, 92, 92, 0.05) 0%, transparent 90%), #ffffff;
+    }
+
+    .landing-header {
+      padding: 30px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--surface);
+    }
+
+    .brand-section {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      width: 100%;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .logo-container svg {
+      width: 48px;
+      height: 48px;
+      fill: var(--primary);
+    }
+
+    .brand-text h2 {
+      font-size: 1.4rem;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .brand-text span {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .hero-container {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .hero-card {
+      background-color: var(--surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-xl);
+      padding: 60px 40px;
+      max-width: 650px;
+      width: 100%;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .hero-card h1 {
+      font-size: 2.5rem;
+      color: var(--text);
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .hero-card p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+    }
+
+    .portal-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .portal-btn {
+      padding: 20px;
+      border-radius: var(--radius-md);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .portal-btn svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .portal-btn-admin {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .portal-btn-admin:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .portal-btn-student {
+      background-color: #fef3c7;
+      color: #b45309;
+      border: 2px solid #f59e0b;
+    }
+
+    .portal-btn-student:hover {
+      background-color: #f59e0b;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .landing-footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 900px) {
+      .landing-header, .student-header {
+        flex-direction: column !important;
+        padding: 20px 15px !important;
+        min-height: auto !important;
+      }
+      .header-logo-container {
+        position: static !important;
+        margin-bottom: 15px !important;
+        justify-content: center !important;
+      }
+      .header-center-text {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+    }
+    @media (max-width: 600px) {
+      .portal-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="landing-body">
+
+  <header class="landing-header" style="background-color: var(--surface); border-bottom: 1px solid var(--border); padding: 20px 30px; position: relative; display: flex; align-items: center; justify-content: center; min-height: 125px;">
+    
+    <!-- Logo -->
+    <div class="header-logo-container" style="position: absolute; left: 40px; display: flex; align-items: center;">
+      <img src="images/logo.jpg" alt="Sri Sivani Logo" style="width: 95px; height: 95px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-md);">
+    </div>
+    
+    <!-- Brand Text -->
+    <div class="header-center-text" style="text-align: center; display: flex; flex-direction: column; align-items: center; max-width: 800px; margin: 0 auto; padding: 0 120px;">
+      <h2 style="font-size: 1.6rem; color: var(--primary); margin: 0; font-family: var(--font-primary); font-weight: 800; letter-spacing: 0.5px; line-height: 1.2;">SRI SIVANI COLLEGE OF ENGINEERING</h2>
+      <span style="font-size: 0.95rem; font-weight: 700; color: #1e293b; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px;">(AUTONOMOUS) &nbsp;|&nbsp; [ An Autonomous Institution ]</span>
+      
+      <span style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); margin-top: 5px; line-height: 1.4;">
+        Approved by AICTE and Permanently Affiliated to JNTUGV, Vizianagaram | Accredited by NAAC, UGC Recognition under 2(f) & 12(B)
+      </span>
+      
+      <span style="font-size: 0.72rem; font-weight: 500; color: var(--text-muted); margin-top: 2px;">
+        NH-16, Chilakapalem Jn., Srikakulam Dist., Andhra Pradesh - 532410
+      </span>
+      
+      <div style="width: 100%; max-width: 450px; height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); margin: 6px 0;"></div>
+      
+      <span style="font-size: 0.72rem; font-weight: 700; color: var(--primary); letter-spacing: 0.3px;">
+        Email: info@srisivani.com &nbsp;|&nbsp; Web: srisivani.com
+      </span>
+    </div>
+
+  </header>
+
+  <main class="hero-container">
+    <section class="hero-card">
+      <h1>Examination Result Portal</h1>
+      <p>Securely upload, process, and view examination performance records and grades.</p>
+      
+      <div class="portal-buttons">
+        <a href="admin-login.html" class="portal-btn portal-btn-admin">
+          <!-- Admin User Icon -->
+          <svg fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+          Admin Login
+        </a>
+        <a href="student-login.html" class="portal-btn portal-btn-student">
+          <!-- Academic Cap Icon -->
+          <svg fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 10.5L4.82 9.5 12 5.58l7.18 3.92L12 13.5z"/>
+          </svg>
+          Student Login
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="landing-footer">
+    &copy; 2026 Sri Sivani College of Engineering (Autonomous). All Rights Reserved.
+  </footer>
+
+    <script src="js/config.js"></script>
+</body>
+</html>

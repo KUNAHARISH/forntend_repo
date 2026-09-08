@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login | Sri Sivani Exam Portal</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-container">
+
+  <div class="login-card">
+    <div class="login-header">
+      <h1>Student Portal</h1>
+      <p>Sign in to view published grade memos</p>
+    </div>
+
+    <div class="alert-error" id="error-box"></div>
+
+    <form id="student-login-form">
+      <div class="form-group">
+        <label for="rollNumber">Roll Number / Username</label>
+        <input type="text" id="rollNumber" class="form-control" placeholder="e.g. 23a81a0001" required autocomplete="username" style="text-transform: uppercase;">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" placeholder="Enter password" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn-submit" id="btn-submit-text">Login</button>
+    </form>
+
+    <div class="login-footer">
+      <a href="index.html">&larr; Back to Landing Page</a>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+  <script>
+    // Handle form submit
+    document.getElementById('student-login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const errorBox = document.getElementById('error-box');
+      const submitBtn = document.getElementById('btn-submit-text');
+      
+      errorBox.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Verifying...';
+
+      const rollNumber = document.getElementById('rollNumber').value.toLowerCase().trim();
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: rollNumber, password })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          if (result.user.role !== 'student') {
+            await fetch('/api/auth/logout', { method: 'POST' });
+            errorBox.innerText = 'Access denied. Administrator cannot access Student portal.';
+            errorBox.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'Login';
+            return;
+          }
+          // Redirect to student dashboard
+          window.location.href = 'student/dashboard.html';
+        } else {
+          errorBox.innerText = result.message || 'Invalid roll number or password';
+          errorBox.style.display = 'block';
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Login';
+        }
+      } catch (err) {
+        errorBox.innerText = 'Server error. Please try again later.';
+        errorBox.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Login';
+      }
+    });
+
+    // Check if already logged in as Student
+    (async () => {
+      try {
+        const res = await fetch('/api/auth/me');
+        const data = await res.json();
+        if (data.authenticated && data.user.role === 'student') {
+          window.location.href = 'student/dashboard.html';
+        }
+      } catch (e) {}
+    })();
+  </script>
+</body>
+</html>

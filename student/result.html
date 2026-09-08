@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Result Memo | Sri Sivani Exam Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/student.css">
+</head>
+<body>
+
+  <!-- College Brand Header -->
+  <header class="student-header" style="background-color: var(--surface); border-bottom: 1px solid var(--border); padding: 20px 30px; position: relative; display: flex; align-items: center; justify-content: center; min-height: 125px;">
+    
+    <!-- Logo -->
+    <div class="header-logo-container" style="position: absolute; left: 40px; display: flex; align-items: center;">
+      <img src="../images/logo.jpg" alt="Sri Sivani Logo" style="width: 95px; height: 95px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow-md);">
+    </div>
+    
+    <!-- Brand Text -->
+    <div class="header-center-text" style="text-align: center; display: flex; flex-direction: column; align-items: center; max-width: 800px; margin: 0 auto; padding: 0 100px;">
+      <h2 style="font-size: 1.6rem; color: var(--primary); margin: 0; font-family: var(--font-primary); font-weight: 800; letter-spacing: 0.5px; line-height: 1.2;">SRI SIVANI COLLEGE OF ENGINEERING</h2>
+      <span style="font-size: 0.95rem; font-weight: 700; color: #1e293b; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 3px;">(AUTONOMOUS) &nbsp;|&nbsp; [ An Autonomous Institution ]</span>
+      
+      <span style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); margin-top: 5px; line-height: 1.4;">
+        Approved by AICTE and Permanently Affiliated to JNTUGV, Vizianagaram | Accredited by NAAC, UGC Recognition under 2(f) & 12(B)
+      </span>
+      
+      <span style="font-size: 0.72rem; font-weight: 500; color: var(--text-muted); margin-top: 2px;">
+        NH-16, Chilakapalem Jn., Srikakulam Dist., Andhra Pradesh - 532410
+      </span>
+      
+      <div style="width: 100%; max-width: 450px; height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); margin: 6px 0;"></div>
+      
+      <span style="font-size: 0.72rem; font-weight: 700; color: var(--primary); letter-spacing: 0.3px;">
+        Email: info@srisivani.com &nbsp;|&nbsp; Web: srisivani.com
+      </span>
+    </div>
+  </header>
+
+  <!-- Navigation Subbar -->
+  <nav class="student-navbar" style="padding: 10px 30px;">
+    <div class="nav-user" style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
+      <span id="student-welcome-name" style="font-weight: 600;">Academic Grade Sheet</span>
+      <div style="display: flex; gap: 15px; align-items: center;">
+        <a href="dashboard.html" class="btn btn-secondary btn-icon" style="padding: 5px 12px; font-size: 0.85rem;">Dashboard</a>
+        <a href="#" class="logout-btn" onclick="handleLogout()">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="student-container">
+    <header style="margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h1>Academic Grade Memo</h1>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Official semester-wise results evaluation report</p>
+      </div>
+      <button class="btn btn-primary" id="btn-download-pdf">Download Official PDF</button>
+    </header>
+
+    <!-- Memo Card -->
+    <section class="memo-card" id="memo-card-container">
+      <div style="text-align: center; padding: 40px 0;">
+        <div class="spinner" style="margin: 0 auto 15px auto;"></div>
+        <p style="color: var(--text-muted);">Fetching evaluation details...</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+  <script src="../js/student.js"></script>
+</body>
+</html>

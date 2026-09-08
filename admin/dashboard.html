@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Sri Sivani Exam Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand" style="flex-direction: row; align-items: center; gap: 10px;">
+        <img src="../images/logo.jpg" alt="Sri Sivani Logo" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;">
+        <div style="display: flex; flex-direction: column; gap: 2px;">
+          <span class="logo" style="font-size: 1.1rem; line-height: 1.2;">Sri Sivani</span>
+          <span class="subtitle" style="font-size: 0.65rem; letter-spacing: 0.5px;">Exam Portal</span>
+        </div>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html" class="sidebar-link active" id="link-dashboard">Dashboard</a></li>
+        <li><a href="students.html" class="sidebar-link" id="link-students">Students</a></li>
+        <li><a href="subjects.html" class="sidebar-link" id="link-subjects">Subjects</a></li>
+        <li><a href="exams.html" class="sidebar-link" id="link-exams">Exams</a></li>
+        <li><a href="upload-result.html" class="sidebar-link" id="link-upload">Upload Marks PDF</a></li>
+        <li><a href="results.html" class="sidebar-link" id="link-results">Results</a></li>
+      </ul>
+      <div class="sidebar-footer">
+        <a href="#" class="sidebar-link" onclick="handleLogout()">Logout</a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <header class="main-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Overview of university academic records</p>
+        </div>
+        <div class="nav-user" style="color: var(--text);">
+          <span>Welcome, <strong>Admin</strong></span>
+        </div>
+      </header>
+
+      <!-- Stats Grid -->
+      <section class="stats-grid">
+        <div class="stats-card">
+          <span class="title">Total Students</span>
+          <span class="value" id="stat-students">-</span>
+        </div>
+        <div class="stats-card">
+          <span class="title">Total Subjects</span>
+          <span class="value" id="stat-subjects">-</span>
+        </div>
+        <div class="stats-card">
+          <span class="title">Total Exams</span>
+          <span class="value" id="stat-exams">-</span>
+        </div>
+        <div class="stats-card">
+          <span class="title">Published Results</span>
+          <span class="value" id="stat-published">-</span>
+        </div>
+        <div class="stats-card">
+          <span class="title">Draft Results</span>
+          <span class="value" id="stat-drafts">-</span>
+        </div>
+      </section>
+
+      <!-- Recent Records Lists -->
+      <section style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+        <!-- Recent Students -->
+        <div class="table-container" style="padding: 20px;">
+          <h3 style="margin-bottom: 15px; font-size: 1.1rem; color: var(--primary);">Recent Student Enrolments</h3>
+          <table id="recent-students-table">
+            <thead>
+              <tr>
+                <th>Roll Number</th>
+                <th>Name</th>
+                <th>Branch</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="3" style="text-align: center; color: var(--text-muted);">Loading recent students...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Recent Exams -->
+        <div class="table-container" style="padding: 20px;">
+          <h3 style="margin-bottom: 15px; font-size: 1.1rem; color: var(--primary);">Recent Exams Configuration</h3>
+          <table id="recent-exams-table">
+            <thead>
+              <tr>
+                <th>Exam Name</th>
+                <th>Semester</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td colspan="3" style="text-align: center; color: var(--text-muted);">Loading recent exams...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../js/config.js"></script>
+    <script src="../js/auth.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>
